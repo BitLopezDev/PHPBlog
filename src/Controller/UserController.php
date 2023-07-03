@@ -2,8 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\Post;
-use App\Form\PostType;
+
+use App\Form\UserType;
+use App\Entity\Users;
 use Doctrine\ORM\EntityManagerInterface;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,12 +12,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class PostController extends AbstractController
+class UserController extends AbstractController
 {
-    #[Route('/post/crear', name: 'post_create', methods: ['GET', 'POST'])]
+    #[Route('/user/create', name: 'user_create', methods: ['GET', 'POST'])]
     public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(PostType::class);
+        $form = $this->createForm(UserType::class);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -24,19 +25,19 @@ class PostController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', 'Publicación guardada con éxito');
-            return $this->redirectToRoute('post_create');
+            return $this->redirectToRoute('user_create');
         }
 
-        return $this->render('post/create.html.twig', [
+        return $this->render('user/create.html.twig', [
             'form' => $form->createView(),
         ]);
     }
 
-    #[Route('/post/{id}/editar', name: 'post_edit', methods: ['GET', 'POST'])]
-    public function edit(Post $post, Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/user/{id}/editar', name: 'user_edit', methods: ['GET', 'POST'])]
+    public function edit(Users $user, Request $request, EntityManagerInterface $entityManager): Response
     {
-        // dd($post);
-        $form = $this->createForm(PostType::class, $post);
+        // dd($user);
+        $form = $this->createForm(UserType::class, $user);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -44,12 +45,12 @@ class PostController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', 'Publicación editada con éxito');
-            return $this->redirectToRoute('post_edit', [
-                'id' => $post->getId()
+            return $this->redirectToRoute('user_edit', [
+                'id' => $user->getId()
             ]);
         }
 
-        return $this->render('post/edit.html.twig', [
+        return $this->render('user/edit.html.twig', [
             'form' => $form->createView(),
         ]);
     }
