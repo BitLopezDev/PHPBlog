@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\PostRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 use Symfony\Component\Validator\Constraints as Assert;
@@ -28,6 +29,9 @@ class Post
     #[ORM\JoinColumn(nullable: false)]
     #[Assert\NotNull]
     private $category;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $sources = null;
 
     public function getId(): ?int
     {
@@ -68,6 +72,18 @@ class Post
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getSources(): ?string
+    {
+        return $this->sources;
+    }
+
+    public function setSources(?string $sources): static
+    {
+        $this->sources = $sources;
 
         return $this;
     }
