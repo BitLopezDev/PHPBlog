@@ -18,12 +18,16 @@ class Post
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\NotBlank]
-    #[Assert\Length(min:9, max:90)]
+    #[Assert\Length(min: 9, max: 90)]
     private $title;
 
     #[ORM\Column(type: 'text')]
     #[Assert\NotBlank]
     private $body;
+
+    #[ORM\Column(type: 'text')]
+    #[Assert\NotBlank]
+    private $avance;
 
     #[ORM\ManyToOne(targetEntity: Category::class)]
     #[ORM\JoinColumn(nullable: false)]
@@ -57,12 +61,25 @@ class Post
         return $this->body;
     }
 
-    public function setBody(?string $body): self
+    public function setBody(?string $avance): self
     {
-        $this->body = $body;
+        $this->body = $avance;
 
         return $this;
     }
+
+    public function getAvance(): ?string
+    {
+        return $this->avance;
+    }
+
+    public function setAvance(?string $avance): self
+    {
+        $this->avance = $avance;
+
+        return $this;
+    }
+
 
     public function getCategory(): ?Category
     {
