@@ -37,6 +37,9 @@ class Post
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $sources = null;
 
+    #[ORM\Column(length: 50)]
+    private ?string $date = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -101,6 +104,18 @@ class Post
     public function setSources(?string $sources): static
     {
         $this->sources = $sources;
+
+        return $this;
+    }
+
+    public function getDate(): ?string
+    {
+        return $this->date;
+    }
+
+    public function setDate(string $date): static
+    {
+        $this->date = $date;
 
         return $this;
     }

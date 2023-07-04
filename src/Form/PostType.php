@@ -15,6 +15,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class PostType extends AbstractType
 {
@@ -40,6 +41,11 @@ class PostType extends AbstractType
             ->add('body', TextareaType::class, [
                 'label' => 'Contenido',
                 'attr' => ['rows' => 9, 'class' => 'bg-light'],
+                //'required' => false
+            ])
+            ->add('date', DateType::class, [
+                'label' => 'Current Date',
+
                 //'required' => false
             ])
             ->add('sources', TextareaType::class, [

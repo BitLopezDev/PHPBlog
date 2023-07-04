@@ -30,12 +30,7 @@
 		{% include '_nav.html.twig' %}
 
 
-		<div class="container py-5">
-			{% include '_alert.html.twig' %}
+		{% block body %}{% endblock %}
 
-			<div class="example-wrapper"> {% block body %}{% endblock %}
-				</div>
-			</div>
-
-		</body>
-	</html>
+	</body>
+</html>

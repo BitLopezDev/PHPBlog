@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'indexbase.html.twig' %}
 
 {% block head %}
 	<meta charset="utf-8"/>
@@ -47,7 +47,7 @@
 				</div>
 				<!-- Nested row for non-featured blog posts-->
 				<div class="row">
-					{% for post in posts %}
+					{% for post in posts | reverse %}
 
 
 						<!-- Blog post-->

@@ -20,8 +20,8 @@
 		<style>
 			.example-wrapper {
 				margin: 1em auto;
-				max-width: 800px;
-				width: 95%;
+				max-width: 800px !important;
+				width: 50%;
 				font: 18px / 1.5 sans-serif;
 			}
 		</style>
@@ -29,8 +29,13 @@
 	<body>
 		{% include '_nav.html.twig' %}
 
+		<div class="container py-5">
+			{% include '_alert.html.twig' %}
 
-		{% block body %}{% endblock %}
+			<div class="example-wrapper"> {% block body %}{% endblock %}
+				</div>
+			</div>
 
-	</body>
-</html>
+
+		</body>
+	</html>
