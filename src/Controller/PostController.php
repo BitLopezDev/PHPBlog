@@ -49,7 +49,7 @@ class PostController extends AbstractController
 
         }
         return $this->render('post/blog.html.twig', [
-            'posts' => $entityManager->getRepository(Post::class)->find($id)
+            'posts' => $post_find
         ]);
 
 
