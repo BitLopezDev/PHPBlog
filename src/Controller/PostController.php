@@ -39,10 +39,23 @@ class PostController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-    this is the code 
+    #[Route('/post/{id}/blog', name: 'post_blog', methods: ['GET'])]
+    public function blog(EntityManagerInterface $entityManager, $id): Response
+    {
+        // dd($entityManager->getRepository(Post::class)->find($id));
+        $post_find = $entityManager->getRepository(Post::class)->find($id);
+        if ($post_find == null) {
+            dd($entityManager->getRepository(Post::class)->find($id));
+
+        }
+        return $this->render('post/blog.html.twig', [
+            'posts' => $entityManager->getRepository(Post::class)->find($id)
+        ]);
 
 
+    }
     #[Route('/post/{id}/editar', name: 'post_edit', methods: ['GET', 'POST'])]
+
     public function edit(Post $post, Request $request, EntityManagerInterface $entityManager): Response
     {
         // dd($post);

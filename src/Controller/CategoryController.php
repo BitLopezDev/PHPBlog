@@ -21,13 +21,13 @@ class CategoryController extends AbstractController
         ]);
     }
 
-    #[Route('/category/crear', name:'category_create', methods:['GET', 'POST'])]
+    #[Route('/category/crear', name: 'category_create', methods: ['GET', 'POST'])]
     public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(CategoryType::class);
 
         $form->handleRequest($request);
-        if ( $form->isSubmitted() && $form->isValid() ) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($form->getData());
             $entityManager->flush();
 
@@ -40,13 +40,13 @@ class CategoryController extends AbstractController
         ]);
     }
 
-    #[Route('/category/{id}/editar', name:'category_edit', methods:['GET', 'POST'])]
+    #[Route('/category/{id}/editar', name: 'category_edit', methods: ['GET', 'POST'])]
     public function edit(Category $category, Request $request, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(CategoryType::class, $category);
 
         $form->handleRequest($request);
-        if ( $form->isSubmitted() && $form->isValid() ) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
             $this->addFlash('success', 'Categoría editada con éxito');
