@@ -19,7 +19,9 @@ class CommentController extends AbstractController
     public function create(Request $request, EntityManagerInterface $entityManager, $postId): Response
     {
         $post = $entityManager->getRepository(Post::class)->find($postId);
-
+        if (!$post) {
+         throw $this->createNotFoundException('The post does not exist');
+        }
         $comment = new Comment();
         $comment->setPost($post);
 

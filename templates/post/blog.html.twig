@@ -46,13 +46,14 @@
 				<!-- Comments section-->
 				<section class="mb-5">
 					<div class="card bg-light">
-						<div
-							class="card-body">
+						<div class="card-body">
 							<!-- Comment form-->
-							<form class="mb-4">
-								<textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!"></textarea>
-							</form>
+							{# <form class="mb-4">
+																																																																							<textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!"></textarea>
+																													
+																																																																						</form> #}
 
+								<a class='btn' href="{{ path('comment_create', {'postId': posts.id}) }}"> Create Comment</a>
 							<!-- Single comment-->
 							{% for comment in comments %}
 								<div class="d-flex">

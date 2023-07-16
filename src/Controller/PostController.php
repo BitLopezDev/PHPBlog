@@ -42,19 +42,15 @@ class PostController extends AbstractController
     #[Route('/post/{id}/blog', name: 'post_blog', methods: ['GET'])]
     public function blog(EntityManagerInterface $entityManager, $id): Response
     {
-        // dd($entityManager->getRepository(Post::class)->find($id));
-        $post_find = $entityManager->getRepository(Post::class)->find($id);
-        if ($post_find == null) {
-            dd($entityManager->getRepository(Post::class)->find($id));
-
-        }
+        
         $post = $entityManager->getRepository(Post::class)->find($id);
         if ($post === null) {
-            dd($post);
+            throw $this->createNotFoundException('The post does not exist');
+
         }
         $comments = $post->getComments();
         return $this->render('post/blog.html.twig', [
-            'posts' => $post_find,
+            'posts' => $post,
             'comments' => $comments
         ]);
 
