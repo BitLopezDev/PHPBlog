@@ -2,7 +2,8 @@
 
 namespace App\Controller;
 
-
+use App\Entity\Post;
+// use App\Controller\Post;
 use App\Form\CommentType;
 use App\Entity\Comment;
 use Doctrine\ORM\EntityManagerInterface;
@@ -14,24 +15,31 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CommentController extends AbstractController
 {
-    #[Route('/comment/create', name: 'comment_create', methods: ['GET', 'POST'])]
-    public function create(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/comment/create/{postId}', name: 'comment_create', methods: ['GET', 'POST'])]
+    public function create(Request $request, EntityManagerInterface $entityManager, $postId): Response
     {
-        $form = $this->createForm(CommentType::class);
+        $post = $entityManager->getRepository(Post::class)->find($postId);
+
+        $comment = new Comment();
+        $comment->setPost($post);
+
+        $form = $this->createForm(CommentType::class, $comment);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($form->getData());
             $entityManager->flush();
 
-            $this->addFlash('success', 'Publicación guardada con éxito');
-            return $this->redirectToRoute('comment_create');
+            $this->addFlash('success', 'Comentario guardado con éxito');
+            return $this->redirectToRoute('comment_create', ['postId' => $postId]);
         }
 
         return $this->render('comment/create.html.twig', [
             'form' => $form->createView(),
+            'post' => $post,
         ]);
     }
+
 
     #[Route('/comment/{id}/editar', name: 'comment_edit', methods: ['GET', 'POST'])]
     public function edit(Comment $comment, Request $request, EntityManagerInterface $entityManager): Response

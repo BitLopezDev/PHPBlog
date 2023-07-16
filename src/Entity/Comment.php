@@ -25,6 +25,10 @@ class Comment
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $sources = null;
 
+    #[ORM\ManyToOne(inversedBy: 'comments')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Post $post = null;
+
     public function __construct()
     {
         $this->authors = new ArrayCollection();
@@ -79,6 +83,18 @@ class Comment
     public function setSources(?string $sources): static
     {
         $this->sources = $sources;
+
+        return $this;
+    }
+
+    public function getPost(): ?Post
+    {
+        return $this->post;
+    }
+
+    public function setPost(?Post $post): static
+    {
+        $this->post = $post;
 
         return $this;
     }

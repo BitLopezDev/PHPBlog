@@ -4,7 +4,8 @@ namespace App\Form;
 
 // use App\Entity\Category;
 use App\Entity\Comment;
-
+use App\Entity\Category;
+use App\Entity\Post;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,9 +20,17 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class CommentType extends AbstractType
 {
+
+
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+
         $builder
+        ->add('content', TextAreaType::class, [
+            'label' => 'Content of Comment',
+            //'required' => false
+        ])
             ->add('content', TextAreaType::class, [
                 'label' => 'Content of Comment',
                 //'required' => false

@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PostController!
+{% endblock %}
+
+{% block body %}
+	<style>
+		.example-wrapper {
+			margin: 1em auto;
+			max-width: 800px;
+			width: 95%;
+			font: 18px / 1.5 sans-serif;
+		}
+		.example-wrapper code {
+			background: #F5F5F5;
+			padding: 2px 6px;
+		}
+	</style>
+
+	<div class="example-wrapper">
+		<h1>Hello! ✅</h1>
+		<section class="mb-5">
+			<div class="card bg-light">
+				<div
+					class="card-body">
+					<!-- Comment form-->
+					<form class="mb-4">
+						<textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!"></textarea>
+					</form>
+
+					<!-- Single comment-->
+					{% for comment in comments %}
+						<div class="d-flex">
+							<div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..."/></div>
+							<div class="ms-3">
+								<div class="fw-bold">Commenter Name</div>
+								{{ comment.content }}
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</section>
+
+	</div>
+{% endblock %}

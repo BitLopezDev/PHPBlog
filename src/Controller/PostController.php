@@ -48,12 +48,35 @@ class PostController extends AbstractController
             dd($entityManager->getRepository(Post::class)->find($id));
 
         }
+        $post = $entityManager->getRepository(Post::class)->find($id);
+        if ($post === null) {
+            dd($post);
+        }
+        $comments = $post->getComments();
         return $this->render('post/blog.html.twig', [
-            'posts' => $post_find
+            'posts' => $post_find,
+            'comments' => $comments
         ]);
 
 
     }
+
+    #[Route('/post/{id}/comments', name: 'post_comments', methods: ['GET'])]
+    public function comments(EntityManagerInterface $entityManager, $id): Response
+    {
+        $post = $entityManager->getRepository(Post::class)->find($id);
+        if ($post === null) {
+            dd($post);
+        }
+        $comments = $post->getComments();
+
+
+
+        return $this->render('post/blog.html.twig', [
+            'comments' => $comments
+        ]);
+    }
+
     #[Route('/post/{id}/editar', name: 'post_edit', methods: ['GET', 'POST'])]
 
     public function edit(Post $post, Request $request, EntityManagerInterface $entityManager): Response
