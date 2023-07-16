@@ -49,15 +49,15 @@
 						<div class="card-body">
 							<!-- Comment form-->
 							{# <form class="mb-4">
-																																																																														<textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!"></textarea>
-																																				
-																																																																													</form> #}
+																																																																																																			<textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!"></textarea>
+																																																									
+																																																																																																		</form> #}
 
 								<a class='btn' href="{{ path('comment_create', {'postId': posts.id}) }}"> Create Comment</a>
 							<!-- Single comment-->
 							{% for comment in comments %}
 								<div class="d-flex">
-									<div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..."/></div>
+									<div class="flex-shrink-0"><img class="rounded-circle" width='50px' height='50px' src="{{ asset('images/favicon.ico') }}" alt="..."/></div>
 									<div class="ms-3">
 										<div class="fw-bold">Commenter Name</div>
 										{{ comment.content }}
