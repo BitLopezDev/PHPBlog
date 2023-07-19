@@ -25,21 +25,21 @@ class PageController extends AbstractController
             'posts' => $entityManager->getRepository(Post::class)->findAll()
         ]);
     }
-    #[Route('/second', name: 'index', methods: ['GET'])]
+    #[Route('/second', name: 'index2', methods: ['GET'])]
     public function index2(EntityManagerInterface $entityManager): Response
     {
         return $this->render('page/index2.html.twig', [
             'posts' => $entityManager->getRepository(Post::class)->findAll()
         ]);
     }
-    #[Route('/third', name: 'index', methods: ['GET'])]
+    #[Route('/third', name: 'index3', methods: ['GET'])]
     public function index3(EntityManagerInterface $entityManager): Response
     {
         return $this->render('page/index3.html.twig', [
             'posts' => $entityManager->getRepository(Post::class)->findAll()
         ]);
     }
-    #[Route('/all', name: 'index', methods: ['GET'])]
+    #[Route('/all', name: 'indexall', methods: ['GET'])]
     public function indexall(EntityManagerInterface $entityManager): Response
     {
         return $this->render('page/all.html.twig', [
