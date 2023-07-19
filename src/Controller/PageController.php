@@ -25,6 +25,28 @@ class PageController extends AbstractController
             'posts' => $entityManager->getRepository(Post::class)->findAll()
         ]);
     }
+    #[Route('/second', name: 'index', methods: ['GET'])]
+    public function index2(EntityManagerInterface $entityManager): Response
+    {
+        return $this->render('page/index2.html.twig', [
+            'posts' => $entityManager->getRepository(Post::class)->findAll()
+        ]);
+    }
+    #[Route('/third', name: 'index', methods: ['GET'])]
+    public function index3(EntityManagerInterface $entityManager): Response
+    {
+        return $this->render('page/index3.html.twig', [
+            'posts' => $entityManager->getRepository(Post::class)->findAll()
+        ]);
+    }
+    #[Route('/all', name: 'index', methods: ['GET'])]
+    public function indexall(EntityManagerInterface $entityManager): Response
+    {
+        return $this->render('page/all.html.twig', [
+            'posts' => $entityManager->getRepository(Post::class)->findAll()
+        ]);
+    }
+
 
     #[Route('/contactos-v1', name: 'contact-v1', methods: ['GET', 'POST'])]
     public function contactV1(Request $request): Response
