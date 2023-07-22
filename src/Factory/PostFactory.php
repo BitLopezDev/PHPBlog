@@ -49,7 +49,7 @@ final class PostFactory extends ModelFactory
         return [
             'avance' => self::faker()->text(),
             'body' => self::faker()->text(),
-            'category' => CategoryFactory::new(),
+            'category' => CategoryFactory::random(),
             'date' => self::faker()->text(50),
             'title' => self::faker()->text(255),
         ];
