@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Users;
+use App\Entity\NewUser;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
@@ -10,19 +10,19 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 
 /**
- * @extends ServiceEntityRepository<Users>
-* @implements PasswordUpgraderInterface<Users>
+ * @extends ServiceEntityRepository<NewUser>
+* @implements PasswordUpgraderInterface<NewUser>
  *
- * @method Users|null find($id, $lockMode = null, $lockVersion = null)
- * @method Users|null findOneBy(array $criteria, array $orderBy = null)
- * @method Users[]    findAll()
- * @method Users[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method NewUser|null find($id, $lockMode = null, $lockVersion = null)
+ * @method NewUser|null findOneBy(array $criteria, array $orderBy = null)
+ * @method NewUser[]    findAll()
+ * @method NewUser[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class UsersRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
+class NewUserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Users::class);
+        parent::__construct($registry, NewUser::class);
     }
 
     /**
@@ -30,7 +30,7 @@ class UsersRepository extends ServiceEntityRepository implements PasswordUpgrade
      */
     public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
     {
-        if (!$user instanceof Users) {
+        if (!$user instanceof NewUser) {
             throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', $user::class));
         }
 
@@ -40,24 +40,24 @@ class UsersRepository extends ServiceEntityRepository implements PasswordUpgrade
     }
 
 //    /**
-//     * @return Users[] Returns an array of Users objects
+//     * @return NewUser[] Returns an array of NewUser objects
 //     */
 //    public function findByExampleField($value): array
 //    {
-//        return $this->createQueryBuilder('u')
-//            ->andWhere('u.exampleField = :val')
+//        return $this->createQueryBuilder('n')
+//            ->andWhere('n.exampleField = :val')
 //            ->setParameter('val', $value)
-//            ->orderBy('u.id', 'ASC')
+//            ->orderBy('n.id', 'ASC')
 //            ->setMaxResults(10)
 //            ->getQuery()
 //            ->getResult()
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Users
+//    public function findOneBySomeField($value): ?NewUser
 //    {
-//        return $this->createQueryBuilder('u')
-//            ->andWhere('u.exampleField = :val')
+//        return $this->createQueryBuilder('n')
+//            ->andWhere('n.exampleField = :val')
 //            ->setParameter('val', $value)
 //            ->getQuery()
 //            ->getOneOrNullResult()
